@@ -1,0 +1,32 @@
+1. Compare the categories in the concurrency note (https://github.itu.dk/jst/PCPP2025-Public/blob/main/week01/
+concurrency-note/concurrencyPCPP.pdf and Goetz, try to find some examples of systems which are in-
+cluded in the categories of Goetz, but not in those in the concurrency note, and vice versa (if possible - if
+not possible, argue why).
+
+Goetz is programmer-centric:
+    “why should you use concurrency when writing code?”
+The note is more abstract and based on examples from the real world:
+    “what kind of concurrency exists in the world?”
+
+Resource utilization and Exploitation:
+	Both are about efficiency: use resources better by adding concurrency (e.g., parallelizing tasks, using idle
+	CPU while waiting for I/O).
+Fairness and Hidden:
+	Fairness is mostly handled by underlying systems (OS scheduler, runtime). This maps closer to “hidden concurrency,”
+	since the programmer doesn’t implement fairness themselves.
+Convenience and	Inherent:
+	Convenience overlaps with inherent concurrency: sometimes the problem naturally has concurrent parts,
+	and expressing them as concurrent tasks is simpler than forcing sequential logic.
+
+
+
+
+2. Find examples of 3 systems in each of the categories in the Concurrency note which you have used yourself
+(as a programmer or user).
+
+    1. Everyday, I and a lot of people use websites and the  webservers that host said websites use concurrency
+     to handle simultaneous requests. (Inherent)
+    2. I play videogames, and gpu has to use concurrency to draw all the pixels to display images and cpu has to
+        evaluate and calculate user inputs. (Exploitation)
+    3. An operating system decides which program gets the most resources, when 1 program is active and the other one
+        is hidden(running in the background). (Hidden)
