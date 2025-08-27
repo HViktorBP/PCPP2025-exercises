@@ -38,14 +38,22 @@ public class TestLongCounterExperiments {
 
         public void increment() {
             lock.lock();
-            count += 1;
-            lock.unlock();
+            try {
+                count += 1;
+            }
+            finally {
+                lock.unlock();
+            }
         }
 
         public void decrement() {
             lock.lock();
-            count -= 1;
-            lock.unlock();
+            try {
+                count -= 1;
+            }
+            finally {
+                lock.unlock();
+            }
         }
 
         public long get() {
