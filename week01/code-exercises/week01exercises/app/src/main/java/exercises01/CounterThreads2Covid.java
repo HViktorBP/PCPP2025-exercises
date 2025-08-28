@@ -9,11 +9,12 @@ public class CounterThreads2Covid {
     long counter = 0;
     final long PEOPLE  = 10_000;
     final long MAX_PEOPLE_COVID = 15_000;
+    ReentrantLock lock = new ReentrantLock();
 
     public CounterThreads2Covid() {
         try {
-            Turnstile turnstile1 = new Turnstile();
-            Turnstile turnstile2 = new Turnstile();
+            Turnstile turnstile1 = new Turnstile(lock);
+            Turnstile turnstile2 = new Turnstile(lock);
 
             turnstile1.start();turnstile2.start();
             turnstile1.join();turnstile2.join();
@@ -32,7 +33,11 @@ public class CounterThreads2Covid {
 
 
     public class Turnstile extends Thread {
-        ReentrantLock lock = new ReentrantLock();
+        ReentrantLock lock;
+
+        Turnstile(ReentrantLock lock) {
+           this.lock = lock;
+        }
 
         public void run() {
             for (int i = 0; i < PEOPLE; i++) {
