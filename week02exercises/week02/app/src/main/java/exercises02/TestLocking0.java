@@ -14,6 +14,7 @@ public class TestLocking0 {
                 for (int i=0; i<count; i++)
                     m.addStatic(1);
         });
+        Mystery.sum();
         t1.start(); t2.start();
         try { t1.join(); t2.join(); } catch (InterruptedException exn) { }
         System.out.printf("Sum is %f and should be %f%n", m.sum(), 2.0 * count);
@@ -22,16 +23,20 @@ public class TestLocking0 {
 
 class Mystery {
     private static double sum = 0;
-
-    public static synchronized void addStatic(double x) {
+    
+    public static synchronized void addStatic(double x) { //locks/synchronizes Mystery class
         sum += x;
     }
 
     public synchronized void addInstance(double x) {
-        sum += x;
+        synchronized(Mystery.class){ // added mystery class lock to instance method
+            sum += x;
+        }
+        
     }
 
-    public static synchronized double sum() {
+    public static  double sum() {
         return sum;
     }
 }
+
