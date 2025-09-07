@@ -30,7 +30,7 @@ class MutableInteger {
     // by using synchronized, unlock() is executed and CPU registers and low-level
     // cache are flushed to memory levels shared by all CPUs
     // 2.4. Commenting out synchronized for the task
-    public int get() {
+    public /*synchronized*/ int get() {
         return value;
     }
 }
