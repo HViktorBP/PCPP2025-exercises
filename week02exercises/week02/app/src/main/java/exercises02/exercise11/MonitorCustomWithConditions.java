@@ -31,7 +31,7 @@ public class MonitorCustomWithConditions {
             readers--;
             if (readers == 0) {
                 preferWriter = true;
-                canWrite.signal();
+                canWrite.signalAll();
             }
         } finally {
             lock.unlock();
