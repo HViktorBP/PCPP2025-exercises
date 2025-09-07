@@ -22,11 +22,15 @@ public class TestMutableInteger {
 
 class MutableInteger {
     // WARNING: Not ready for usage by concurrent programs
-    private int value = 0;
-    public void set(int value) {
+    private volatile int value = 0; // 2.4. Added volatile for the task
+    public /* synchronized */ void set(int value) {
         this.value = value;
     }
-    public int get() {
+    // Added synchronized here to fix visibility
+    // by using synchronized, unlock() is executed and CPU registers and low-level
+    // cache are flushed to memory levels shared by all CPUs
+    // 2.4. Commenting out synchronized for the task
+    public /*synchronized*/ int get() {
         return value;
     }
 }
